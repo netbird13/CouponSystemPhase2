@@ -2,7 +2,6 @@ package com.AK.CouponSystemPhase2.beans;
 
 import org.springframework.stereotype.Component;
 
-@Component
 public class LoginManager {
 
 	private String name;
