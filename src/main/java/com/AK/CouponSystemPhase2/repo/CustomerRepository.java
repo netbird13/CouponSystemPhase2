@@ -8,16 +8,9 @@ import com.AK.CouponSystemPhase2.beans.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-//	// multi condition & ignore case
-//	public List<Customer> findCustomerByEmailAndPassword(String email, String password);
+	// multi condition & ignore case //
+	public Customer findCustomerByEmailAndPassword(String email, String password);
 
-//	public List<Customer> addCustomer(Customer customer);// add
-//
-//	public List<Customer> updateCustomer(Customer customer); // update
-//
-//	public List<Customer> deleteCustomerByID(int id); // delete
-//
-//	public List<Customer> findAllCustomers();
-//
-//	public List<Customer> findOneCustomer(int id);
+	public List<Customer> deleteCustomerByID(int id); // delete
+
 }
