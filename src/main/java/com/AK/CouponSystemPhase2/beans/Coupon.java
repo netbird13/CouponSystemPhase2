@@ -9,8 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name = "coupons")
-@Table
+@Entity
+@Table(name = "coupons")
 public class Coupon {
 
 	private int id;

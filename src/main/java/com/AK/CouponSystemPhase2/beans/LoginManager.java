@@ -13,7 +13,6 @@ public class LoginManager {
 	public LoginManager(String name, String password) {
 		this.name = name;
 		this.password = password;
-	}
-	
+	}	
 	
 }

@@ -9,11 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
-@Entity(name = "customers")
-@Table
+@Entity
+@Table(name = "customers")
 public class Customer {
 
 	private long id;
@@ -44,7 +44,7 @@ public class Customer {
 	}
 
 	// full CTOR
-	public Customer(int id, String firstName, String lastName, String email, String password, List<Coupon> coupons) {
+	public Customer(long id, String firstName, String lastName, String email, String password, List<Coupon> coupons) {
 		this.id = id;
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -59,7 +59,7 @@ public class Customer {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 
@@ -99,7 +99,7 @@ public class Customer {
 		this.password = password;
 	}
 
-	@OneToMany(cascade = CascadeType.PERSIST) // (cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.PERSIST) // (cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
 	public List<Coupon> getCoupons() {
 		return coupons;
 	}

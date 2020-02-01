@@ -9,8 +9,6 @@ import com.AK.CouponSystemPhase2.beans.Company;
 public interface CompanyRepository extends JpaRepository<Company, Long> {
 
 	// multi condition & ignore case
-	public Company getCompanyByEmailAndPass(String email, String password);
-
-	public Company deleteCompanyById(int id); // delete
+	public Company getCompanyByEmailAndPassword(String email, String password);
 
 }

@@ -13,7 +13,7 @@ public class CouponSystemPhase2Application {
 		System.out.println("Go");
 	}
 
-	RestTemplate restTemplate = new RestTemplate();
+//	RestTemplate restTemplate = new RestTemplate();
 	
 	/*
 	 * // getCustomerByEmailAndPassword

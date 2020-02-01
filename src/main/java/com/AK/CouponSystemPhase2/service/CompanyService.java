@@ -2,6 +2,7 @@ package com.AK.CouponSystemPhase2.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import javax.annotation.PostConstruct;
 
@@ -26,7 +27,7 @@ public class CompanyService {
 	}
 
 	public Company getCompany(String email, String pass) {
-		return repo.getCompanyByEmailAndPass(email, pass);
+		return repo.getCompanyByEmailAndPassword(email, pass);
 	}
 
 	public Company addCompany(Company company) {
@@ -35,17 +36,13 @@ public class CompanyService {
 
 	public Company updateCompany(Company oldCompany, Company newCompany) {
 		return repo.save(newCompany);
-	}
-
-	public Company deleteCompany(int id) {
-		return repo.deleteCompanyById(id);
-	}
+	}	
 
 	public List<Company> getAllCompanies() {
 		return repo.findAll();
 	}
 
-	public Company getOneCompany(int id) {
-		return repo.deleteCompanyById(id);
+	public Optional<Company> getOneCompany(long id) {
+		return repo.findById(id);
 	}
 }
