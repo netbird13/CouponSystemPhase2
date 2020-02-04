@@ -27,6 +27,7 @@ public class Coupon {
 	public Coupon() {
 	}
 
+	// partial CTOR without id (auto-generated)
 	public Coupon(int companyID, int categoryID, String title, String description, Date startDate, Date endDate,
 			Integer amount, double price, String image) {
 		this.companyID = companyID;
@@ -40,6 +41,7 @@ public class Coupon {
 		this.image = image;
 	}
 
+	// full CTOR
 	public Coupon(int id, int companyID, int categoryID, String title, String description, Date startDate, Date endDate,
 			Integer amount, double price, String image) {
 
