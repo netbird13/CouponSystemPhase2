@@ -15,7 +15,7 @@ import com.AK.CouponSystemPhase2.beans.Company;
 import com.AK.CouponSystemPhase2.service.CompanyService;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200")
+//@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("company")
 public class CompanyController {
 
