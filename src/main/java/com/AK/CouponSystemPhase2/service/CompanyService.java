@@ -26,7 +26,8 @@ public class CompanyService {
 	public void InitDB() {
 		repoCompany.deleteAll();
 		List<Company> companies = new ArrayList<>();
-		companies.add(new Company("Tavor", "tavor@gmail.com", "31415"));
+		companies.add(new Company("Tavor", "Tavor@gmail.com", "31415"));
+		companies.add(new Company("Galil", "Galil@gmail.com", "75988"));
 		repoCompany.saveAll(companies);
 	}
 
