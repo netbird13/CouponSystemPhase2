@@ -24,14 +24,7 @@ public class CustomerService {
 		repo.deleteAll();
 		List<Customer> customers = new ArrayList<>();
 		customers.add(new Customer("Naftalin", "Cohen", "Naftalin@gmail.com", "1234"));
-		customers.add(new Customer("Matisyahu", "Makabi", "Matisyahu@gmail.com", "5678"));
-//		Customer c1 = new Customer();
-//		c1.setCoupons(null);
-//		c1.setEmail("Naftalin@gmail.com");
-//		c1.setFirstName("Naftalin");
-//		c1.setLastName("Cohen");
-//		c1.setPassword("1234");		
-//		customers.add(c1);		
+		customers.add(new Customer("Matisyahu", "Makabi", "Matisyahu@gmail.com", "5678"));	
 		repo.saveAll(customers);
 	}
 
