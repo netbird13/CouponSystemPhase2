@@ -13,7 +13,7 @@ import com.AK.CouponSystemPhase2.beans.Customer;
 import com.AK.CouponSystemPhase2.service.CustomerService;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("customer")
 public class CustomerController {
 

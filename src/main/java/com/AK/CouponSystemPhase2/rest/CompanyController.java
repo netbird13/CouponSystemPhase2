@@ -15,21 +15,13 @@ import com.AK.CouponSystemPhase2.beans.Company;
 import com.AK.CouponSystemPhase2.service.CompanyService;
 
 @RestController
-//@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("company")
 public class CompanyController {
 
 	@Autowired
 	CompanyService service;
 
-	@GetMapping("getAllCompanies")
-	public ResponseEntity<?> getAllCompanies() {
-		return new ResponseEntity <List<Company>>( service.getAllCompanies(), HttpStatus.OK);
-	}
 	
-	@GetMapping("getCustomer")
-	public ResponseEntity<?> getCompanyByEmailAndPassword(@RequestParam(name = "email") String email,
-			@RequestParam(name = "pass") String pass) {
-		return new ResponseEntity<Company>((Company) service.getCompany(email, pass), HttpStatus.OK);
-	}
+	
 }
