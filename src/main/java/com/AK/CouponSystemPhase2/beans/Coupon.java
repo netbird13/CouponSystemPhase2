@@ -13,7 +13,7 @@ import javax.persistence.Table;
 @Table(name = "coupons")
 public class Coupon {
 
-	private int id;
+	private long id;
 	private int companyID;
 	private int categoryID;
 	private String title;
@@ -42,7 +42,7 @@ public class Coupon {
 	}
 
 	// full CTOR
-	public Coupon(int id, int companyID, int categoryID, String title, String description, Date startDate, Date endDate,
+	public Coupon(long id, int companyID, int categoryID, String title, String description, Date startDate, Date endDate,
 			Integer amount, double price, String image) {
 
 		this.id = id;
@@ -59,11 +59,11 @@ public class Coupon {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	public int getId() {
+	public long getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(long id) {
 		this.id = id;
 	}
 

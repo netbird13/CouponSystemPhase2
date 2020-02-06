@@ -15,61 +15,60 @@ import com.AK.CouponSystemPhase2.repo.CustomerRepository;
 public class AdminService {
 
 	@Autowired
-	CompanyRepository repoCmpny;
+	CompanyRepository repoCompany;
 	@Autowired
-	CustomerRepository repoCstmr;
-	
-	
-	// Company methods	
+	CustomerRepository repoCustomer;
+
+	// Company methods
 	public Company addCompany(Company company) {
-		return repoCmpny.save(company);
+		return repoCompany.save(company);
 	}
-	
+
 	public void updateCompany(long id, Company newCompany) {
-		Optional<Company> company = repoCmpny.findById(id);
-		if(company.isPresent()) {
+		Optional<Company> company = repoCompany.findById(id);
+		if (company.isPresent()) {
 			newCompany.setId(id);
-			repoCmpny.save(newCompany);
+			repoCompany.save(newCompany);
 		}
 	}
-	
+
 	public void deleteCompany(long id) {
-		 Company company = repoCmpny.findById(id).get();
-		 repoCmpny.delete(company);
+		Company company = repoCompany.findById(id).get();
+		repoCompany.delete(company);
 	}
 
 	public List<Company> getCompanies() {
-		return repoCmpny.findAll();
-	}	
-	
-	public Optional<Company> getCompany(long id) {
-		return repoCmpny.findById(id);
-	}	
-		
-	// Customer methods	
-	public Customer addCustomer(Customer customer) {
-		return repoCstmr.save(customer);
+		return repoCompany.findAll();
 	}
-	
+
+	public Optional<Company> getCompany(long id) {
+		return repoCompany.findById(id);
+	}
+
+	// Customer methods
+	public Customer addCustomer(Customer customer) {
+		return repoCustomer.save(customer);
+	}
+
 	public void updateCustomer(long id, Customer newCustomer) {
-		Optional<Customer> customer = repoCstmr.findById(id);
-		if(customer.isPresent()){
+		Optional<Customer> customer = repoCustomer.findById(id);
+		if (customer.isPresent()) {
 			newCustomer.setId(id);
-			repoCstmr.save(newCustomer);
+			repoCustomer.save(newCustomer);
 		}
 	}
-	
+
 	public void deleteCustomer(long id) {
-		Customer customer = repoCstmr.findById(id).get();
-		 repoCstmr.delete(customer);
+		Customer customer = repoCustomer.findById(id).get();
+		repoCustomer.delete(customer);
 	}
-	
-	public List<Customer> getCustomers(){
-		return repoCstmr.findAll();
+
+	public List<Customer> getCustomers() {
+		return repoCustomer.findAll();
 	}
-	
-	public Optional<Customer> getCustomer(long id){
-		return repoCstmr.findById(id);
+
+	public Optional<Customer> getCustomer(long id) {
+		return repoCustomer.findById(id);
 	}
-	
+
 }

@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.RequestEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -20,82 +19,80 @@ import org.springframework.web.bind.annotation.RestController;
 import com.AK.CouponSystemPhase2.beans.Company;
 import com.AK.CouponSystemPhase2.beans.Customer;
 import com.AK.CouponSystemPhase2.service.AdminService;
-import com.AK.CouponSystemPhase2.service.CompanyService;
-import com.AK.CouponSystemPhase2.service.CustomerService;
-import com.fasterxml.jackson.core.sym.Name;
-
 
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("admin")
-public class AdminController {
-	
+public class AdminController extends ClientController{
+
 	@Autowired
 	AdminService adminService;
-	
+
 	// Company methods
 
 	@PostMapping("addCompany")
 	public ResponseEntity<?> addCompany(@RequestBody Company company) {
 		adminService.addCompany(company);
-		return new ResponseEntity<>(company.getId() + " " + company.getName() + " was added successfully", HttpStatus.OK);
+		return new ResponseEntity<>(company.getId() + " " + company.getName() + " was added successfully",
+				HttpStatus.OK);
 	}
-	
+
 	@PutMapping("updateCompany")
-	public ResponseEntity<?> updateCompany(@RequestParam(name = "num") String id,@RequestBody Company newCompany){
-		int cmpnyId = Integer.parseInt(id);
+	public ResponseEntity<?> updateCompany(@RequestParam(name = "num") String id, @RequestBody Company newCompany) {
+		long cmpnyId = Long.parseLong(id);
 		adminService.updateCompany(cmpnyId, newCompany);
 		return new ResponseEntity<>(cmpnyId + " " + newCompany.getName() + " was updated successfully", HttpStatus.OK);
 	}
-	
+
 	@DeleteMapping("deleteCompany")
 	public ResponseEntity<?> deleteCompany(@RequestParam(name = "num") String id) {
 		int cmpnyId = Integer.parseInt(id);
 		adminService.deleteCompany(cmpnyId);
 		return new ResponseEntity<String>("Company deleted", HttpStatus.OK);
 	}
-	
+
 	@GetMapping("getCompanies")
 	public ResponseEntity<?> getAllCompanies() {
-		return new ResponseEntity <List<Company>>(adminService.getCompanies(), HttpStatus.OK);
+		return new ResponseEntity<List<Company>>(adminService.getCompanies(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping("getCompany/{id}")
 	public ResponseEntity<?> getOneCompany(@PathVariable(name = "num") String id) {
 		int cmpnyId = Integer.parseInt(id);
 		return new ResponseEntity<Company>((Company) adminService.getCompany(cmpnyId).get(), HttpStatus.OK);
-	}	
-	
-	
+	}
+
 	// Customer methods
-	
+
 	@PostMapping("addCustomer")
 	public ResponseEntity<?> addCustomer(@RequestBody Customer customer) {
 		adminService.addCustomer(customer);
-		return new ResponseEntity<>(customer.getFirstName() + " " + customer.getLastName() + "was added successfully", HttpStatus.OK);
+		return new ResponseEntity<>(customer.getFirstName() + " " + customer.getLastName() + "was added successfully",
+				HttpStatus.OK);
 	}
-	
-	public ResponseEntity<?> updateCustomer(@RequestParam(name = "num") String id, @RequestBody Customer newCustomer){
-		int cstmrId = Integer.parseInt(id);
+
+	public ResponseEntity<?> updateCustomer(@RequestParam(name = "num") String id, @RequestBody Customer newCustomer) {
+		long cstmrId = Long.parseLong(id);
 		adminService.updateCustomer(cstmrId, newCustomer);
-		return new ResponseEntity<>(cstmrId + " " + newCustomer.getFirstName() + " " + newCustomer.getLastName() + " was updated successfully", HttpStatus.OK);		
+		return new ResponseEntity<>(cstmrId + " " + newCustomer.getFirstName() + " " + newCustomer.getLastName()
+				+ " was updated successfully", HttpStatus.OK);
 	}
-	
+
 	@GetMapping("getCustomer/{id}")
 	public ResponseEntity<?> getOneCustomer(@PathVariable(name = "num") String id) {
 		int cstmrId = Integer.parseInt(id);
 		return new ResponseEntity<Customer>((Customer) adminService.getCustomer(cstmrId).get(), HttpStatus.OK);
-	}	
-		
+	}
+
 	@GetMapping("getCustomers")
 	public ResponseEntity<?> getallCustomers() {
 		return new ResponseEntity<Customer>((Customer) adminService.getCustomers(), HttpStatus.OK);
-	}	
-	
+	}
+
 	@DeleteMapping("deleteCustomer")
 	public ResponseEntity<?> deleteCustomer(@RequestParam(name = "num") String id) {
 		int cstmrId = Integer.parseInt(id);
 		adminService.deleteCustomer(cstmrId);
 		return new ResponseEntity<String>("Customer deleted", HttpStatus.OK);
-	}	
+	}
 }

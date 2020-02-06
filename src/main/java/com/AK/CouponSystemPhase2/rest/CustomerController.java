@@ -15,15 +15,15 @@ import com.AK.CouponSystemPhase2.service.CustomerService;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("customer")
-public class CustomerController {
+public class CustomerController extends ClientController{
 
 	@Autowired
-	CustomerService service;
+	CustomerService customerService;
 
 	@GetMapping("getcustomer")
 	public ResponseEntity<?> getCustomerByEmailAndPassword(@RequestParam(name = "email") String email,
 			@RequestParam(name = "pass") String pass) {
-		return new ResponseEntity<Customer>((Customer) service.getCustomer(email, pass), HttpStatus.OK);
+		return new ResponseEntity<Customer>((Customer) customerService.getCustomer(email, pass), HttpStatus.OK);
 	}
 
 }
