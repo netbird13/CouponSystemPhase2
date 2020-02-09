@@ -1,5 +1,8 @@
 package com.AK.CouponSystemPhase2.beans;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,24 +18,39 @@ public class Company {
 	private String name;
 	private String email;
 	private String password;
+	private List<Coupon> coupons = new ArrayList<Coupon>();
 
+	// empty CTOR
 	public Company() {
 	}
 
-	// CTOR without id (auto-generated)
+	// partial CTOR without id
+		public Company(String name, String email, String password, List<Coupon> coupons) {
+			super();
+			this.name = name;
+			this.email = email;
+			this.password = password;
+			this.coupons = coupons;
+		}		
+		
+	// partial CTOR without id & coupons
 	public Company(String name, String email, String password) {
+		super();
 		this.name = name;
 		this.email = email;
 		this.password = password;
 	}
 
-	public Company(int id, String name, String email, String password) {
+	// full CTOR
+	public Company(long id, String name, String email, String password, List<Coupon> coupons) {
+		super();
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
+		this.coupons = coupons;
 	}
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
@@ -56,7 +74,7 @@ public class Company {
 	public String getEmail() {
 		return email;
 	}
-
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -70,9 +88,19 @@ public class Company {
 		this.password = password;
 	}
 
-	@Override
-	public String toString() {
-		return "Company [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + "]";
+	@Column
+	public List<Coupon> getCoupons() {
+		return coupons;
 	}
 
+	public void setCoupons(List<Coupon> coupons) {
+		this.coupons = coupons;
+	}
+
+	@Override
+	public String toString() {
+		return "Company [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", coupons="
+				+ coupons + "]";
+	}	
+	
 }

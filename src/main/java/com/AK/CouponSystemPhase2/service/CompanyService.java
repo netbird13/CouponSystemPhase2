@@ -43,13 +43,13 @@ public class CompanyService {
 		}
 	}
 
-	public void deleteCoupon(long id) {
-		Coupon coupon = repoCoupon.findById(id).get();
-		repoCoupon.delete(coupon);
+	public void deleteCouponById(long couponId) {		
+		repoCoupon.deleteById(couponId);
 	}
 	
 	public List <Coupon> getCompanyCoupons (long companyId){
-		
-		return null;
+		Optional<Company> company = repoCompany.findById(companyId);
+		List <Coupon> companyCoupons = company.get().getCoupons();
+		return companyCoupons;
 	}
 }

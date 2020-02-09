@@ -6,4 +6,6 @@ import com.AK.CouponSystemPhase2.beans.Company;
 import com.AK.CouponSystemPhase2.beans.Coupon;
 
 public interface CompanyRepository extends JpaRepository<Company, Long> {
+	
+	
 }

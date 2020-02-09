@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.AK.CouponSystemPhase2.beans.Company;
 import com.AK.CouponSystemPhase2.beans.Coupon;
+import com.AK.CouponSystemPhase2.repo.CouponRepository;
 import com.AK.CouponSystemPhase2.service.CompanyService;
 
 @RestController
@@ -25,7 +27,7 @@ public class CompanyController extends ClientController {
 
 	@Autowired
 	CompanyService serviceCompany;
-
+	
 	@PostMapping("addCoupon")
 	public ResponseEntity<?> addCoupon(@RequestBody Coupon coupon) {
 		serviceCompany.addCoupon(coupon);
@@ -40,10 +42,17 @@ public class CompanyController extends ClientController {
 		return new ResponseEntity<>("Coupon with id: " + newCoupon.getId() + "titled " + newCoupon.getTitle()+ " was succussfully updated ", HttpStatus.OK);
 	}
 	
+	// ToDo: a company can delete only its own coupons
 	@DeleteMapping("deleteCoupon")
 	public ResponseEntity<?> deleteCoupon(@RequestParam (name = "num")String id){
-		
+		long couponId = Long.parseLong(id);
+		serviceCompany.deleteCouponById(couponId);
 		return new ResponseEntity<>("The coupon was deleted succussfully", HttpStatus.OK);
+	}
+	
+	public ResponseEntity<?> getCompanyCoupons (@RequestParam (name = "num") String id){
+		long companyId = Long.parseLong(id);		
+		return new ResponseEntity<List<Coupon>> (serviceCompany.getCompanyCoupons(companyId), HttpStatus.OK);
 	}
 
 }
