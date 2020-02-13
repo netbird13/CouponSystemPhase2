@@ -14,7 +14,7 @@ import javax.persistence.Table;
 public class Coupon {
 
 	private long id;
-	private int companyID;
+	private long companyID;
 	private int categoryID;
 	private String title;
 	private String description;
@@ -23,13 +23,14 @@ public class Coupon {
 	private Integer amount;
 	private double price;
 	private String image;
+	private Category category;
 
 	public Coupon() {
 	}
 
 	// partial CTOR without id (auto-generated)
-	public Coupon(int companyID, int categoryID, String title, String description, Date startDate, Date endDate,
-			Integer amount, double price, String image) {
+	public Coupon(long companyID, int categoryID, String title, String description, Date startDate, Date endDate,
+			Integer amount, double price, String image, Category category) {
 		this.companyID = companyID;
 		this.categoryID = categoryID;
 		this.title = title;
@@ -39,11 +40,12 @@ public class Coupon {
 		this.amount = amount;
 		this.price = price;
 		this.image = image;
+		this.category = category;
 	}
 
 	// full CTOR
-	public Coupon(long id, int companyID, int categoryID, String title, String description, Date startDate, Date endDate,
-			Integer amount, double price, String image) {
+	public Coupon(long id, long companyID, int categoryID, String title, String description, Date startDate, Date endDate,
+			Integer amount, double price, String image, Category category) {
 
 		this.id = id;
 		this.companyID = companyID;
@@ -55,6 +57,7 @@ public class Coupon {
 		this.amount = amount;
 		this.price = price;
 		this.image = image;
+		this.category = category;
 	}
 
 	@Id
@@ -68,11 +71,11 @@ public class Coupon {
 	}
 
 	@Column
-	public int getCompanyID() {
+	public long getCompanyID() {
 		return companyID;
 	}
 
-	public void setCompanyID(int companyID) {
+	public void setCompanyID(long companyID) {
 		this.companyID = companyID;
 	}
 
@@ -146,13 +149,22 @@ public class Coupon {
 
 	public void setImage(String image) {
 		this.image = image;
+	}	
+	
+	@Column
+	public Category getCategory() {
+		return category;
+	}
+
+	public void setCategory(Category category) {
+		this.category = category;
 	}
 
 	@Override
 	public String toString() {
 		return "Coupon [id=" + id + ", companyID=" + companyID + ", categoryID=" + categoryID + ", title=" + title
 				+ ", description=" + description + ", startDate=" + startDate + ", endDate=" + endDate + ", amount="
-				+ amount + ", price=" + price + ", image=" + image + "]";
-	}
+				+ amount + ", price=" + price + ", image=" + image + ", category=" + category + "]";
+	}	
 
 }

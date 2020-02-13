@@ -1,7 +1,5 @@
 package com.AK.CouponSystemPhase2.beans;
 
-public class Category {
-
-	private int id;
-	private String name;
+public enum Category {
+	Food,Cosmetics,ElectricDevices,Computers,Travel,Alcohol,Toys,Office	
 }

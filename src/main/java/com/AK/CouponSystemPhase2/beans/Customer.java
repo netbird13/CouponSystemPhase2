@@ -98,7 +98,7 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-
+	
 	@ManyToMany(cascade = CascadeType.PERSIST) // (cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
 	public List<Coupon> getCoupons() {
 		return coupons;

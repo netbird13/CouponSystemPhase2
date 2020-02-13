@@ -9,6 +9,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.AK.CouponSystemPhase2.beans.Category;
 import com.AK.CouponSystemPhase2.beans.Company;
 import com.AK.CouponSystemPhase2.beans.Coupon;
 import com.AK.CouponSystemPhase2.repo.CompanyRepository;
@@ -21,7 +22,8 @@ public class CompanyService {
 	CompanyRepository repoCompany;
 	@Autowired
 	CouponRepository repoCoupon;
-
+	
+	
 	@PostConstruct
 	public void InitDB() {
 		repoCompany.deleteAll();
@@ -52,4 +54,12 @@ public class CompanyService {
 		List <Coupon> companyCoupons = company.get().getCoupons();
 		return companyCoupons;
 	}
+		
+	public List <Coupon> getCompanyCouponsByCategory (long companyID, Category category){		
+		List<Coupon> companyCouponsByCategory = repoCoupon.getCoupnsByCompanyAndCategory(companyID, category);
+		return companyCouponsByCategory;
+	}
+	
+	
+	
 }

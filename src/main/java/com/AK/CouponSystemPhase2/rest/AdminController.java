@@ -82,11 +82,11 @@ public class AdminController extends ClientController{
 	public ResponseEntity<?> getOneCustomer(@PathVariable(name = "num") String id) {
 		int cstmrId = Integer.parseInt(id);
 		return new ResponseEntity<Customer>((Customer) adminService.getCustomer(cstmrId).get(), HttpStatus.OK);
-	}
-
+	}	
+	
 	@GetMapping("getCustomers")
 	public ResponseEntity<?> getallCustomers() {
-		return new ResponseEntity<Customer>((Customer) adminService.getCustomers(), HttpStatus.OK);
+		return new ResponseEntity<List<Customer>>(adminService.getCustomers(), HttpStatus.OK);
 	}
 
 	@DeleteMapping("deleteCustomer")
