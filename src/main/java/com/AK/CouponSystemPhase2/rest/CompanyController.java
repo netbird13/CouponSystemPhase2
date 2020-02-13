@@ -15,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.AK.CouponSystemPhase2.beans.Company;
+import com.AK.CouponSystemPhase2.beans.Category;
 import com.AK.CouponSystemPhase2.beans.Coupon;
-import com.AK.CouponSystemPhase2.repo.CouponRepository;
 import com.AK.CouponSystemPhase2.service.CompanyService;
 
 @RestController
@@ -50,9 +49,16 @@ public class CompanyController extends ClientController {
 		return new ResponseEntity<>("The coupon was deleted succussfully", HttpStatus.OK);
 	}
 	
+	@GetMapping("getcoupons")
 	public ResponseEntity<?> getCompanyCoupons (@RequestParam (name = "num") String id){
 		long companyId = Long.parseLong(id);		
 		return new ResponseEntity<List<Coupon>> (serviceCompany.getCompanyCoupons(companyId), HttpStatus.OK);
+	}
+	
+	@GetMapping("couponsbyCat")
+	public ResponseEntity<?> getCompnayCouponsByCategory (@RequestParam (name = "num") String id, @RequestParam (name = "cat") Category category){
+		long companyId = Long.parseLong(id);		
+		return new ResponseEntity<List<Coupon>> (serviceCompany.getCompanyCouponsByCategory(companyId, category), HttpStatus.OK);
 	}
 
 }

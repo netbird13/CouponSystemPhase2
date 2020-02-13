@@ -56,7 +56,7 @@ public class CompanyService {
 	}
 		
 	public List <Coupon> getCompanyCouponsByCategory (long companyID, Category category){		
-		List<Coupon> companyCouponsByCategory = repoCoupon.getCoupnsByCompanyAndCategory(companyID, category);
+		List<Coupon> companyCouponsByCategory = repoCoupon.getCoupnsByCompanyIDAndCategory(companyID, category);
 		return companyCouponsByCategory;
 	}
 	
