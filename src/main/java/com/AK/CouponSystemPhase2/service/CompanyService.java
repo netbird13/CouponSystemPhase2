@@ -65,4 +65,9 @@ public class CompanyService {
 		return coupons;
 	}
 	
+	public String getCompanyDetails (long companyID) {
+		String companyDetails = repoCompany.getOne(companyID).toString();
+		return companyDetails;
+	}
+	
 }

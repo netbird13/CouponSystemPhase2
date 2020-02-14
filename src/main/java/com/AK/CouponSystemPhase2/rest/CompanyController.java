@@ -67,5 +67,11 @@ public class CompanyController extends ClientController {
 		long companyId = Long.parseLong(id);
 		return new ResponseEntity<List<Coupon>> (serviceCompany.getCompanyCouponsByMaxPrice(companyId, price),HttpStatus.OK);
 	}	
+	
+	@GetMapping("companyDetails")
+	public ResponseEntity<?> getCompanyDetails (@RequestParam (name = "num") String id){
+		long companyId = Long.parseLong(id);
+		return new ResponseEntity<>(serviceCompany.getCompanyDetails(companyId),HttpStatus.OK);
+	}
 
 }
