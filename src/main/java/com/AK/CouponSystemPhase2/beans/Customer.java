@@ -34,7 +34,7 @@ public class Customer {
 		this.password = password;
 	}
 
-	// partial CTOR without id (auto-generated) 
+	// partial CTOR without id (auto-generated)
 	public Customer(String firstName, String lastName, String email, String password, List<Coupon> coupons) {
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -98,7 +98,7 @@ public class Customer {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
 	@ManyToMany(cascade = CascadeType.PERSIST) // (cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
 	public List<Coupon> getCoupons() {
 		return coupons;

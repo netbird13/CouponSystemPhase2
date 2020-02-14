@@ -18,8 +18,7 @@ public class AdminService {
 	CompanyRepository repoCompany;
 	@Autowired
 	CustomerRepository repoCustomer;
-	
-	
+
 	// Company methods
 	public Company addCompany(Company company) {
 		return repoCompany.save(company);
@@ -70,6 +69,6 @@ public class AdminService {
 
 	public Optional<Customer> getCustomer(long id) {
 		return repoCustomer.findById(id);
-	}	
+	}
 
 }

@@ -26,14 +26,14 @@ public class Company {
 	}
 
 	// partial CTOR without id
-		public Company(String name, String email, String password, List<Coupon> coupons) {
-			super();
-			this.name = name;
-			this.email = email;
-			this.password = password;
-			this.coupons = coupons;
-		}		
-		
+	public Company(String name, String email, String password, List<Coupon> coupons) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+		this.coupons = coupons;
+	}
+
 	// partial CTOR without id & coupons
 	public Company(String name, String email, String password) {
 		super();
@@ -51,7 +51,7 @@ public class Company {
 		this.password = password;
 		this.coupons = coupons;
 	}
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	public long getId() {
@@ -75,7 +75,7 @@ public class Company {
 	public String getEmail() {
 		return email;
 	}
-	
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
@@ -102,6 +102,6 @@ public class Company {
 	public String toString() {
 		return "Company [id=" + id + ", name=" + name + ", email=" + email + ", password=" + password + ", coupons="
 				+ coupons + "]";
-	}	
-	
+	}
+
 }
