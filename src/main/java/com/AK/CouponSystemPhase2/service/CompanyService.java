@@ -60,6 +60,9 @@ public class CompanyService {
 		return companyCouponsByCategory;
 	}
 	
-	
+	public List <Coupon> getCompanyCouponsByMaxPrice (long companyID, double price){
+		List <Coupon> coupons = repoCoupon.getCouponsByCompanyIDAndPriceLessThan(companyID, price);
+		return coupons;
+	}
 	
 }

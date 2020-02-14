@@ -55,10 +55,17 @@ public class CompanyController extends ClientController {
 		return new ResponseEntity<List<Coupon>> (serviceCompany.getCompanyCoupons(companyId), HttpStatus.OK);
 	}
 	
-	@GetMapping("couponsbyCat")
+	@GetMapping("couponsByCat")
 	public ResponseEntity<?> getCompnayCouponsByCategory (@RequestParam (name = "num") String id, @RequestParam (name = "cat") Category category){
 		long companyId = Long.parseLong(id);		
 		return new ResponseEntity<List<Coupon>> (serviceCompany.getCompanyCouponsByCategory(companyId, category), HttpStatus.OK);
 	}
+	
+	// may need to parseDouble for price
+	@GetMapping("coupnsByMax")
+	public ResponseEntity<?> getCompanyCouponsByMaxPrice (@RequestParam (name = "num") String id, @RequestParam (name = "price") double price){
+		long companyId = Long.parseLong(id);
+		return new ResponseEntity<List<Coupon>> (serviceCompany.getCompanyCouponsByMaxPrice(companyId, price),HttpStatus.OK);
+	}	
 
 }
