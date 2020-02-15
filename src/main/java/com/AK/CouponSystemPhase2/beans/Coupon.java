@@ -43,9 +43,23 @@ public class Coupon {
 		this.category = category;
 	}
 
+	// partial CTOR without id (auto-generated) and without amount
+	public Coupon(long companyID, int categoryID, String title, String description, Date startDate, Date endDate,
+			double price, String image, Category category) {
+		this.companyID = companyID;
+		this.categoryID = categoryID;
+		this.title = title;
+		this.description = description;
+		this.startDate = startDate;
+		this.endDate = endDate;
+		this.price = price;
+		this.image = image;
+		this.category = category;
+	}
+
 	// full CTOR
-	public Coupon(long id, long companyID, int categoryID, String title, String description, Date startDate, Date endDate,
-			Integer amount, double price, String image, Category category) {
+	public Coupon(long id, long companyID, int categoryID, String title, String description, Date startDate,
+			Date endDate, Integer amount, double price, String image, Category category) {
 
 		this.id = id;
 		this.companyID = companyID;
@@ -149,8 +163,8 @@ public class Coupon {
 
 	public void setImage(String image) {
 		this.image = image;
-	}	
-	
+	}
+
 	@Column
 	public Category getCategory() {
 		return category;
@@ -165,6 +179,6 @@ public class Coupon {
 		return "Coupon [id=" + id + ", companyID=" + companyID + ", categoryID=" + categoryID + ", title=" + title
 				+ ", description=" + description + ", startDate=" + startDate + ", endDate=" + endDate + ", amount="
 				+ amount + ", price=" + price + ", image=" + image + ", category=" + category + "]";
-	}	
+	}
 
 }
