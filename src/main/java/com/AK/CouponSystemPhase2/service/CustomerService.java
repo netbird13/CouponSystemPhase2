@@ -10,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.AK.CouponSystemPhase2.beans.Category;
-import com.AK.CouponSystemPhase2.beans.Company;
 import com.AK.CouponSystemPhase2.beans.Coupon;
 import com.AK.CouponSystemPhase2.beans.Customer;
-import com.AK.CouponSystemPhase2.repo.CompanyRepository;
 import com.AK.CouponSystemPhase2.repo.CouponRepository;
 import com.AK.CouponSystemPhase2.repo.CustomerRepository;
 
@@ -39,8 +37,8 @@ public class CustomerService {
 		Optional<Coupon> existCoupon = repoCoupon.findById(coupon.getId());
 		existCustomer.get().getCoupons().add(coupon);
 		existCoupon.get().setAmount(existCoupon.get().getAmount() - 1);
-		repoCustomer.save(repoCustomer.getOne(existCustomer.get().getId()));
-		repoCoupon.save(repoCoupon.getOne(existCoupon.get().getId()));
+		repoCustomer.save(existCustomer.get());
+		repoCoupon.save(existCoupon.get());
 		return "purchase succeeded";
 	}
 
