@@ -22,8 +22,7 @@ public class CompanyService {
 	CompanyRepository repoCompany;
 	@Autowired
 	CouponRepository repoCoupon;
-	
-	
+
 	@PostConstruct
 	public void InitDB() {
 		repoCompany.deleteAll();
@@ -45,29 +44,29 @@ public class CompanyService {
 		}
 	}
 
-	public void deleteCouponById(long couponId) {		
+	public void deleteCouponById(long couponId) {
 		repoCoupon.deleteById(couponId);
 	}
-	
-	public List <Coupon> getCompanyCoupons (long companyId){
+
+	public List<Coupon> getCompanyCoupons(long companyId) {
 		Optional<Company> company = repoCompany.findById(companyId);
-		List <Coupon> companyCoupons = company.get().getCoupons();
+		List<Coupon> companyCoupons = company.get().getCoupons();
 		return companyCoupons;
 	}
-		
-	public List <Coupon> getCompanyCouponsByCategory (long companyID, Category category){		
+
+	public List<Coupon> getCompanyCouponsByCategory(long companyID, Category category) {
 		List<Coupon> companyCouponsByCategory = repoCoupon.getCoupnsByCompanyIDAndCategory(companyID, category);
 		return companyCouponsByCategory;
 	}
-	
-	public List <Coupon> getCompanyCouponsByMaxPrice (long companyID, double price){
-		List <Coupon> coupons = repoCoupon.getCouponsByCompanyIDAndPriceLessThan(companyID, price);
+
+	public List<Coupon> getCompanyCouponsByMaxPrice(long companyID, double price) {
+		List<Coupon> coupons = repoCoupon.getCouponsByCompanyIDAndPriceLessThan(companyID, price);
 		return coupons;
 	}
-	
-	public String getCompanyDetails (long companyID) {
+
+	public String getCompanyDetails(long companyID) {
 		String companyDetails = repoCompany.getOne(companyID).toString();
 		return companyDetails;
 	}
-	
+
 }
