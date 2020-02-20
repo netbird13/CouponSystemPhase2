@@ -57,7 +57,7 @@ public class AdminController extends ClientController{
 	}
 
 	@GetMapping("getCompany/{id}")
-	public ResponseEntity<?> getOneCompany(@PathVariable(name = "num") String id) {
+	public ResponseEntity<?> getOneCompany(@PathVariable String id) {
 		int cmpnyId = Integer.parseInt(id);
 		return new ResponseEntity<Company>((Company) adminService.getCompany(cmpnyId).get(), HttpStatus.OK);
 	}
@@ -71,6 +71,7 @@ public class AdminController extends ClientController{
 				HttpStatus.OK);
 	}
 
+	@PutMapping("updateCustomer")
 	public ResponseEntity<?> updateCustomer(@RequestParam(name = "num") String id, @RequestBody Customer newCustomer) {
 		long cstmrId = Long.parseLong(id);
 		adminService.updateCustomer(cstmrId, newCustomer);
@@ -79,7 +80,7 @@ public class AdminController extends ClientController{
 	}
 
 	@GetMapping("getCustomer/{id}")
-	public ResponseEntity<?> getOneCustomer(@PathVariable(name = "num") String id) {
+	public ResponseEntity<?> getOneCustomer(@PathVariable String id) {
 		int cstmrId = Integer.parseInt(id);
 		return new ResponseEntity<Customer>((Customer) adminService.getCustomer(cstmrId).get(), HttpStatus.OK);
 	}	

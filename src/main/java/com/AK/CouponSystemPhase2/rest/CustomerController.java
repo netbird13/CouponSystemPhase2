@@ -39,7 +39,7 @@ public class CustomerController extends ClientController {
 		return new ResponseEntity<List<Coupon>>(serviceCustomer.getCustomerCoupons(customerId), HttpStatus.OK);
 	}
 
-	@GetMapping("couponsByCat")
+	@GetMapping("couponsByCat") // add ignoreCase to category
 	public ResponseEntity<?> getCustomerCouponsByCategory(@RequestParam(name = "num") String id,
 			@RequestParam(name = "cat") Category category) {
 		long customerId = Long.parseLong(id);

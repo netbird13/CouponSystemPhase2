@@ -65,7 +65,6 @@ public class CompanyController extends ClientController {
 				HttpStatus.OK);
 	}
 
-	// may need to parseDouble for price
 	@GetMapping("coupnsByMax")
 	public ResponseEntity<?> getCompanyCouponsByMaxPrice(@RequestParam(name = "num") String id,
 			@RequestParam(name = "price") String price) {
