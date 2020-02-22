@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.AK.CouponSystemPhase2.beans.Company;
@@ -20,7 +21,13 @@ public class AdminService {
 	CustomerRepository repoCustomer;
 
 	// Company methods
+
 	public Company addCompany(Company company) {
+		Optional<Company> companyInRepoName = repoCompany.getCompanyByName(company.getName());
+		Optional<Company> companyInRepoEmail = repoCompany.getCompanyByEmail(company.getEmail());
+		if (companyInRepoName.isPresent() || companyInRepoEmail.isPresent()) {
+			return null;
+		}
 		return repoCompany.save(company);
 	}
 

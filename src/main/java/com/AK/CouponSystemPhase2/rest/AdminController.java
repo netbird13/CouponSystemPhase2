@@ -32,9 +32,12 @@ public class AdminController extends ClientController{
 
 	@PostMapping("addCompany")
 	public ResponseEntity<?> addCompany(@RequestBody Company company) {
-		adminService.addCompany(company);
+		Company companyReturned = adminService.addCompany(company);
+		if(companyReturned != null) {
 		return new ResponseEntity<>(company.getId() + " " + company.getName() + " was added successfully",
 				HttpStatus.OK);
+	}
+		return new ResponseEntity<>("The company was NOT added. it's name " + company.getName() + " or it's email " + company.getEmail() + " may already been in use",HttpStatus.BAD_REQUEST);
 	}
 
 	@PutMapping("updateCompany")
