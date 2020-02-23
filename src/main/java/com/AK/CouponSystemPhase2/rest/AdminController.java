@@ -23,7 +23,7 @@ import com.AK.CouponSystemPhase2.service.AdminService;
 @RestController
 @CrossOrigin(origins = "http://localhost:4200")
 @RequestMapping("admin")
-public class AdminController extends ClientController{
+public class AdminController extends ClientController {
 
 	@Autowired
 	AdminService adminService;
@@ -33,11 +33,12 @@ public class AdminController extends ClientController{
 	@PostMapping("addCompany")
 	public ResponseEntity<?> addCompany(@RequestBody Company company) {
 		Company companyReturned = adminService.addCompany(company);
-		if(companyReturned != null) {
-		return new ResponseEntity<>(company.getId() + " " + company.getName() + " was added successfully",
-				HttpStatus.OK);
-	}
-		return new ResponseEntity<>("The company was NOT added. its name " + company.getName() + " or its email " + company.getEmail() + " may already been in use",HttpStatus.BAD_REQUEST);
+		if (companyReturned != null) {
+			return new ResponseEntity<>(company.getId() + " " + company.getName() + " was added successfully",
+					HttpStatus.OK);
+		}
+		return new ResponseEntity<>("The company was NOT added. its name " + company.getName() + " or its email "
+				+ company.getEmail() + " may already been in use", HttpStatus.BAD_REQUEST);
 	}
 
 	@PutMapping("updateCompany")
@@ -86,8 +87,8 @@ public class AdminController extends ClientController{
 	public ResponseEntity<?> getOneCustomer(@PathVariable String id) {
 		int cstmrId = Integer.parseInt(id);
 		return new ResponseEntity<Customer>((Customer) adminService.getCustomer(cstmrId).get(), HttpStatus.OK);
-	}	
-	
+	}
+
 	@GetMapping("getCustomers")
 	public ResponseEntity<?> getallCustomers() {
 		return new ResponseEntity<List<Customer>>(adminService.getCustomers(), HttpStatus.OK);

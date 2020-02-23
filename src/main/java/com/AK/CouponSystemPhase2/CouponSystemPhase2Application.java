@@ -14,7 +14,7 @@ public class CouponSystemPhase2Application {
 	}
 
 //	RestTemplate restTemplate = new RestTemplate();
-	
+
 	/*
 	 * // getCustomerByEmailAndPassword
 	 * System.out.println(restTemplate.getForObject(
@@ -36,4 +36,4 @@ public class CouponSystemPhase2Application {
 	 * // update System.out.println(restTemplate.updateForObject(
 	 * "http://localhost:8080/customer/addcstmr/updateForObject",c1,Customer.class);
 	 */
-	}
+}
