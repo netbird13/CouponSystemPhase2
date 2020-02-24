@@ -31,12 +31,16 @@ public class AdminService {
 		return repoCompany.save(company);
 	}
 
-	public void updateCompany(long id, Company newCompany) {
+	public Company updateCompany(long id, Company newCompany) {
 		Optional<Company> company = repoCompany.findById(id);
+		if (company.get().getId() == newCompany.getId() || company.get().getName() == newCompany.getName()) {
+		return null;
+		}
 		if (company.isPresent()) {
 			newCompany.setId(id);
 			repoCompany.save(newCompany);
 		}
+		return newCompany;
 	}
 
 	public void deleteCompany(long id) {

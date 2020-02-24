@@ -34,18 +34,25 @@ public class AdminController extends ClientController {
 	public ResponseEntity<?> addCompany(@RequestBody Company company) {
 		Company companyReturned = adminService.addCompany(company);
 		if (companyReturned != null) {
-			return new ResponseEntity<>(company.getId() + " " + company.getName() + " was added successfully",
+			return new ResponseEntity<>(company.getId() + " " + company.getName() + " was added successfully.",
 					HttpStatus.OK);
 		}
-		return new ResponseEntity<>("The company was NOT added. its name " + company.getName() + " or its email "
-				+ company.getEmail() + " may already been in use", HttpStatus.BAD_REQUEST);
+		return new ResponseEntity<>("The company was NOT added. its name '" + company.getName() + "' or its email '"
+				+ company.getEmail() + "' may already been in use.", HttpStatus.BAD_REQUEST);
 	}
 
 	@PutMapping("updateCompany")
 	public ResponseEntity<?> updateCompany(@RequestParam(name = "num") String id, @RequestBody Company newCompany) {
-		long cmpnyId = Long.parseLong(id);
-		adminService.updateCompany(cmpnyId, newCompany);
-		return new ResponseEntity<>(cmpnyId + " " + newCompany.getName() + " was updated successfully", HttpStatus.OK);
+		long companyId = Long.parseLong(id);
+		Company companyReturned = adminService.updateCompany(companyId, newCompany);
+		if (companyReturned != null) {
+			return new ResponseEntity<>(companyId + " " + newCompany.getName() + " was updated successfully.",
+					HttpStatus.OK);
+		}
+		return new ResponseEntity<>(
+				newCompany.getName() + " was NOT updated! Its id '" + companyId + "' and its name are immutable.",
+				HttpStatus.BAD_REQUEST);
+
 	}
 
 	@DeleteMapping("deleteCompany")
