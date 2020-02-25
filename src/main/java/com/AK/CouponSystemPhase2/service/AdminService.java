@@ -32,15 +32,19 @@ public class AdminService {
 	}
 
 	public Company updateCompany(long id, Company newCompany) {
-		Optional<Company> company = repoCompany.findById(id);
-		if (company.get().getId() == newCompany.getId() || company.get().getName() == newCompany.getName()) {
+		Optional<Company> companyInRepoById = repoCompany.findById(id);
+		if (!newCompany.getName().equalsIgnoreCase(companyInRepoById.get().getName())) {
 		return null;
 		}
-		if (company.isPresent()) {
-			newCompany.setId(id);
-			repoCompany.save(newCompany);
-		}
-		return newCompany;
+		if (!newCompany.getEmail().equals(companyInRepoById.get().getEmail())) {		
+		Optional<Company> companyInRepoEmail = repoCompany.getCompanyByEmail(newCompany.getEmail());
+		Optional<Customer> customerInRepoEmail = repoCustomer.getCustomerByEmail(newCompany.getEmail());
+		if (companyInRepoEmail.isPresent() || customerInRepoEmail.isPresent()) {
+			return null;			
+		}}
+		companyInRepoById.get().setEmail(newCompany.getEmail());
+		companyInRepoById.get().setPassword(newCompany.getPassword());
+		return repoCompany.save(companyInRepoById.get());		
 	}
 
 	public void deleteCompany(long id) {
