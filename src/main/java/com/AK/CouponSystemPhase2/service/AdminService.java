@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.AK.CouponSystemPhase2.beans.Company;
-import com.AK.CouponSystemPhase2.beans.Coupon;
 import com.AK.CouponSystemPhase2.beans.Customer;
 import com.AK.CouponSystemPhase2.repo.CompanyRepository;
 import com.AK.CouponSystemPhase2.repo.CouponRepository;
@@ -53,7 +52,6 @@ public class AdminService {
 
 	public void deleteCompany(long id) {
 		Company company = repoCompany.findById(id).get();
-		repoCoupon.getCouponsByCompanyID(company.getId()).clear();
 		repoCompany.delete(company);
 	}
 
