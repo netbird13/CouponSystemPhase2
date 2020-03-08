@@ -43,15 +43,16 @@ public class Coupon {
 		this.category = category;
 	}
 
-	// partial CTOR without id (auto-generated) and without amount
-	public Coupon(long companyID, int categoryID, String title, String description, Calendar startDate, Calendar endDate,
-			double price, String image, Category category) {
-		this.companyID = companyID;
+	
+//	partial CTOR without id (auto-generated) and without companyID (companyID is auto-generated when company is created)
+	public Coupon(int categoryID, String title, String description, Calendar startDate, Calendar endDate,
+			Integer amount, double price, String image, Category category) {
 		this.categoryID = categoryID;
 		this.title = title;
 		this.description = description;
 		this.startDate = startDate;
 		this.endDate = endDate;
+		this.amount = amount;
 		this.price = price;
 		this.image = image;
 		this.category = category;

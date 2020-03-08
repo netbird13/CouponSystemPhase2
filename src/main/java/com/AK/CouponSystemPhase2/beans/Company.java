@@ -3,6 +3,7 @@ package com.AK.CouponSystemPhase2.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -97,7 +98,7 @@ public class Company {
 		this.password = password;
 	}
 
-	@OneToMany
+	@OneToMany(cascade = CascadeType.PERSIST) // (cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
 	public List<Coupon> getCoupons() {
 		return coupons;
 	}

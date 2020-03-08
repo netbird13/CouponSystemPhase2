@@ -44,20 +44,21 @@ public class CompanyService {
 		startDate.set(Calendar.YEAR, new Random().nextInt((currentYear + 30) - currentYear) + currentYear);
 		endDate = startDate;
 		endDate.set(Calendar.YEAR, endDate.get(Calendar.YEAR) + 1);
-		coupons.add(new Coupon(666, 1, "Buy one shoe - get the other for free", "Shoes don't have to come in pairs",
+		coupons.add(new Coupon(2, "Buy one shoe - get the other for free", "Shoes don't have to come in pairs",
 				startDate, endDate, 13, 33.99, "image", Category.Clothes));
 
 		List<Coupon> coupons1 = new ArrayList<>();
 		startDate.set(Calendar.YEAR, new Random().nextInt((currentYear + 30) - currentYear) + currentYear);
 		endDate = startDate;
 		endDate.set(Calendar.YEAR, endDate.get(Calendar.YEAR) + 1);
-		coupons1.add(new Coupon(999, 1, "Println", "Print LN on T-shirt", startDate, endDate, 200, 99.33, "image",
+		coupons1.add(new Coupon(2, "Println", "Print LN on T-shirt", startDate, endDate, 200, 99.33, "image",
 				Category.Clothes));
 
 		repoCompany.deleteAll();
 		List<Company> companies = new ArrayList<>();
-		companies.add(new Company(666,"Tavor", "Tavor@gmail.com", "31415"));
-		companies.add(new Company(999,"Galil", "Galil@gmail.com", "75988"));
+		companies.add(new Company("Tavor", "Tavor@gmail.com", "31415",coupons));
+		companies.add(new Company("Galil", "Galil@gmail.com", "75988",coupons1));
+		
 		repoCompany.saveAll(companies);
 	}
 
