@@ -65,6 +65,10 @@ public class AdminService {
 
 	// Customer methods
 	public Customer addCustomer(Customer customer) {
+		Optional<Customer> customr = repoCustomer.getCustomerByEmail(customer.getEmail());
+		if(customr.isPresent()) {
+			return null;
+		}
 		return repoCustomer.save(customer);
 	}
 
