@@ -98,7 +98,7 @@ public class Company {
 		this.password = password;
 	}
 
-	@OneToMany(cascade = CascadeType.PERSIST) // (cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
+	@OneToMany(cascade = CascadeType.ALL)
 	public List<Coupon> getCoupons() {
 		return coupons;
 	}

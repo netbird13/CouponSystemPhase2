@@ -99,7 +99,7 @@ public class Customer {
 		this.password = password;
 	}
 
-	@ManyToMany(cascade = CascadeType.PERSIST) // (cascade=CascadeType.PERSIST,fetch=FetchType.EAGER)
+	@ManyToMany(cascade = CascadeType.ALL)
 	public List<Coupon> getCoupons() {
 		return coupons;
 	}

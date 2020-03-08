@@ -7,8 +7,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.AK.CouponSystemPhase2.beans.Company;
+import com.AK.CouponSystemPhase2.beans.Coupon;
 import com.AK.CouponSystemPhase2.beans.Customer;
 import com.AK.CouponSystemPhase2.repo.CompanyRepository;
+import com.AK.CouponSystemPhase2.repo.CouponRepository;
 import com.AK.CouponSystemPhase2.repo.CustomerRepository;
 
 @Service
@@ -18,6 +20,8 @@ public class AdminService {
 	CompanyRepository repoCompany;
 	@Autowired
 	CustomerRepository repoCustomer;
+	@Autowired
+	CouponRepository repoCoupon;
 
 	// Company methods
 
@@ -49,9 +53,7 @@ public class AdminService {
 
 	public void deleteCompany(long id) {
 		Company company = repoCompany.findById(id).get();
-		if(company.getCoupons()!=null) {
-			company.setCoupons(null);
-		}
+		repoCoupon.getCouponsByCompanyID(company.getId()).clear();
 		repoCompany.delete(company);
 	}
 
