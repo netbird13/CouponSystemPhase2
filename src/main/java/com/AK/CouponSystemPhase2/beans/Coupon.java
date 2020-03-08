@@ -1,6 +1,6 @@
 package com.AK.CouponSystemPhase2.beans;
 
-import java.sql.Date;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,8 +18,8 @@ public class Coupon {
 	private int categoryID;
 	private String title;
 	private String description;
-	private Date startDate;
-	private Date endDate;
+	private Calendar startDate;
+	private Calendar endDate;
 	private Integer amount;
 	private double price;
 	private String image;
@@ -29,7 +29,7 @@ public class Coupon {
 	}
 
 	// partial CTOR without id (auto-generated)
-	public Coupon(long companyID, int categoryID, String title, String description, Date startDate, Date endDate,
+	public Coupon(long companyID, int categoryID, String title, String description, Calendar startDate, Calendar endDate,
 			Integer amount, double price, String image, Category category) {
 		this.companyID = companyID;
 		this.categoryID = categoryID;
@@ -44,7 +44,7 @@ public class Coupon {
 	}
 
 	// partial CTOR without id (auto-generated) and without amount
-	public Coupon(long companyID, int categoryID, String title, String description, Date startDate, Date endDate,
+	public Coupon(long companyID, int categoryID, String title, String description, Calendar startDate, Calendar endDate,
 			double price, String image, Category category) {
 		this.companyID = companyID;
 		this.categoryID = categoryID;
@@ -58,8 +58,8 @@ public class Coupon {
 	}
 
 	// full CTOR
-	public Coupon(long id, long companyID, int categoryID, String title, String description, Date startDate,
-			Date endDate, Integer amount, double price, String image, Category category) {
+	public Coupon(long id, long companyID, int categoryID, String title, String description, Calendar startDate,
+			Calendar endDate, Integer amount, double price, String image, Category category) {
 
 		this.id = id;
 		this.companyID = companyID;
@@ -121,20 +121,20 @@ public class Coupon {
 	}
 
 	@Column
-	public Date getStartDate() {
+	public Calendar getStartDate() {
 		return startDate;
 	}
 
-	public void setStartDate(Date startDate) {
+	public void setStartDate(Calendar startDate) {
 		this.startDate = startDate;
 	}
 
 	@Column
-	public Date getEndDate() {
+	public Calendar getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(Calendar endDate) {
 		this.endDate = endDate;
 	}
 

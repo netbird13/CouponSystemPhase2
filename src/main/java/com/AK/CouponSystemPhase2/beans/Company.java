@@ -34,7 +34,15 @@ public class Company {
 		this.coupons = coupons;
 	}
 
-	// partial CTOR without id & coupons
+	// partial CTOR without coupons
+	public Company(long id, String name, String email, String password) {
+		super();
+		this.name = name;
+		this.email = email;
+		this.password = password;
+	}
+
+	// partial CTOR without id & without coupons
 	public Company(String name, String email, String password) {
 		super();
 		this.name = name;

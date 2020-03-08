@@ -49,6 +49,9 @@ public class AdminService {
 
 	public void deleteCompany(long id) {
 		Company company = repoCompany.findById(id).get();
+		if(repoCompany.getOne(id).getCoupons()!=null) {
+			repoCompany.getOne(id).setCoupons(null);
+		}
 		repoCompany.delete(company);
 	}
 
