@@ -29,8 +29,8 @@ public class Coupon {
 	}
 
 	// partial CTOR without id (auto-generated)
-	public Coupon(long companyID, int categoryID, String title, String description, Calendar startDate, Calendar endDate,
-			Integer amount, double price, String image, Category category) {
+	public Coupon(long companyID, int categoryID, String title, String description, Calendar startDate,
+			Calendar endDate, Integer amount, double price, String image, Category category) {
 		this.companyID = companyID;
 		this.categoryID = categoryID;
 		this.title = title;
@@ -43,7 +43,6 @@ public class Coupon {
 		this.category = category;
 	}
 
-	
 //	partial CTOR without id (auto-generated) and without companyID (companyID is auto-generated when company is created)
 	public Coupon(int categoryID, String title, String description, Calendar startDate, Calendar endDate,
 			Integer amount, double price, String image, Category category) {

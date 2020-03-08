@@ -28,18 +28,14 @@ public class CompanyService {
 	@Autowired
 	CouponRepository repoCoupon;
 
-//	Coupon CTOR w/o couponId
-//	long companyID, int categoryID, String title, String description, Date startDate, Date endDate,
-//	Integer amount, double price, String image, Category category	
-
 	@PostConstruct
 	public void InitDB() {
 		int currentYear = new GregorianCalendar().get(Calendar.YEAR);
 		Calendar startDate = new GregorianCalendar();
 		Calendar endDate = new GregorianCalendar();
-		
+
 		repoCoupon.deleteAll();
-		
+
 		List<Coupon> coupons = new ArrayList<>();
 		startDate.set(Calendar.YEAR, new Random().nextInt((currentYear + 30) - currentYear) + currentYear);
 		endDate = startDate;
@@ -56,9 +52,9 @@ public class CompanyService {
 
 		repoCompany.deleteAll();
 		List<Company> companies = new ArrayList<>();
-		companies.add(new Company("Tavor", "Tavor@gmail.com", "31415",coupons));
-		companies.add(new Company("Galil", "Galil@gmail.com", "75988",coupons1));
-		
+		companies.add(new Company("Tavor", "Tavor@gmail.com", "31415", coupons));
+		companies.add(new Company("Galil", "Galil@gmail.com", "75988", coupons1));
+
 		repoCompany.saveAll(companies);
 	}
 

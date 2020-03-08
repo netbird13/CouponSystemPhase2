@@ -11,9 +11,8 @@ import javax.persistence.Table;
 public class Client {
 
 	private long id;
-	
-	
-	//Empty CTOR
+
+	// Empty CTOR
 	public Client() {
 	}
 
@@ -25,6 +24,6 @@ public class Client {
 
 	public void setId(long id) {
 		this.id = id;
-	}	
-	
+	}
+
 }
