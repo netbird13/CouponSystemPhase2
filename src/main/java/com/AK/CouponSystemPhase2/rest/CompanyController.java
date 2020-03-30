@@ -31,7 +31,7 @@ public class CompanyController extends ClientController {
 	public ResponseEntity<?> addCoupon(@RequestBody Coupon coupon) {
 		serviceCompany.addCoupon(coupon);
 		return new ResponseEntity<>(
-				"the coupon with id: " + coupon.getId() + " titled: " + coupon.getTitle() + " was added succussfully",
+				"the coupon titled: " + coupon.getTitle() + " was added succussfully",
 				HttpStatus.OK);
 	}
 

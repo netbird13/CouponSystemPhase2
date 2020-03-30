@@ -23,19 +23,19 @@ public class CustomerService {
 	@Autowired
 	private CouponRepository repoCoupon;
 
-	@PostConstruct
-	public void InitDB() {
-		repoCustomer.deleteAll();
-		List<Customer> customers = new ArrayList<>();
-		customers.add(new Customer("Naftalin", "Cohen", "Naftalin@gmail.com", "1234"));
-		customers.add(new Customer("Matisyahu", "Makabi", "Matisyahu@gmail.com", "5678"));
-		repoCustomer.saveAll(customers);
-	}
+//	@PostConstruct
+//	public void InitDB() {
+//		repoCustomer.deleteAll();
+//		List<Customer> customers = new ArrayList<>();
+//		customers.add(new Customer("Naftalin", "Cohen", "Naftalin@gmail.com", "1234"));
+//		customers.add(new Customer("Matisyahu", "Makabi", "Matisyahu@gmail.com", "5678"));
+//		repoCustomer.saveAll(customers);
+//	}
 
-	public String purchaseCoupon(long customerId, Coupon coupon) {
+	public String purchaseCoupon(long customerId, long couponid) {
 		Optional<Customer> existCustomer = repoCustomer.findById(customerId);
-		Optional<Coupon> existCoupon = repoCoupon.findById(coupon.getId());
-		existCustomer.get().getCoupons().add(coupon);
+		Optional<Coupon> existCoupon = repoCoupon.findById(couponid);
+		existCustomer.get().getCoupons().add(existCoupon.get());
 		existCoupon.get().setAmount(existCoupon.get().getAmount() - 1);
 		repoCustomer.save(existCustomer.get());
 		repoCoupon.save(existCoupon.get());

@@ -26,10 +26,11 @@ public class CustomerController extends ClientController {
 	CustomerService serviceCustomer;
 
 	@PostMapping("purchaseCoupon")
-	public ResponseEntity<?> purchaseCoupon(@RequestParam(name = "num") String id, @RequestBody Coupon coupon) {
-		long customerId = Long.parseLong(id);
-		serviceCustomer.purchaseCoupon(customerId, coupon);
-		return new ResponseEntity<>("the coupon with id: " + coupon.getId() + "titled: " + coupon.getTitle()
+	public ResponseEntity<?> purchaseCoupon(@RequestParam(name = "cuid") String customerid,@RequestParam(name = "coid") String couponid) {
+		long customerId = Long.parseLong(customerid);
+		long couponId = Long.parseLong(couponid);
+		serviceCustomer.purchaseCoupon(customerId, couponId);
+		return new ResponseEntity<>("the coupon with id: " + couponid
 				+ " was purchased successfully", HttpStatus.OK);
 	}
 
