@@ -30,7 +30,7 @@ public class CustomerController extends ClientController {
 		long customerId = Long.parseLong(customerid);
 		long couponId = Long.parseLong(couponid);
 		serviceCustomer.purchaseCoupon(customerId, couponId);
-		return new ResponseEntity<>("the coupon with id: " + couponid
+		return new ResponseEntity<>("the coupon with id:" + couponid
 				+ " was purchased successfully", HttpStatus.OK);
 	}
 

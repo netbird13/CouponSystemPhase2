@@ -78,7 +78,7 @@ public class AdminController extends ClientController {
 	@PostMapping("addCustomer")
 	public ResponseEntity<?> addCustomer(@RequestBody Customer customer) {
 		adminService.addCustomer(customer);
-		return new ResponseEntity<>(customer.getFirstName() + " " + customer.getLastName() + "was added successfully",
+		return new ResponseEntity<>(customer.getFirstName() + " " + customer.getLastName() + " was added successfully",
 				HttpStatus.OK);
 	}
 

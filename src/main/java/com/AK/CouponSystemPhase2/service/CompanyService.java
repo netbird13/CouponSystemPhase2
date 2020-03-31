@@ -18,8 +18,10 @@ import com.AK.CouponSystemPhase2.CouponSystemPhase2Application;
 import com.AK.CouponSystemPhase2.beans.Category;
 import com.AK.CouponSystemPhase2.beans.Company;
 import com.AK.CouponSystemPhase2.beans.Coupon;
+import com.AK.CouponSystemPhase2.beans.Customer;
 import com.AK.CouponSystemPhase2.repo.CompanyRepository;
 import com.AK.CouponSystemPhase2.repo.CouponRepository;
+import com.AK.CouponSystemPhase2.repo.CustomerRepository;
 
 @Service
 public class CompanyService {
@@ -28,6 +30,8 @@ public class CompanyService {
 	CompanyRepository repoCompany;
 	@Autowired
 	CouponRepository repoCoupon;
+	@Autowired
+	CustomerRepository repoCustomer;
 
 //	@PostConstruct
 //	public void InitDB() {
@@ -73,9 +77,9 @@ public class CompanyService {
 //	}
 
 	public void addCoupon(Coupon coupon) {
-		Optional <Company> company = repoCompany.findById(coupon.getCompanyID());
+		Optional<Company> company = repoCompany.findById(coupon.getCompanyID());
 		company.get().getCoupons().add(coupon);
-		repoCompany.save(company.get());		
+		repoCompany.save(company.get());
 	}
 
 	public void updateCoupon(long id, Coupon newCoupon) {
@@ -87,7 +91,28 @@ public class CompanyService {
 	}
 
 	public void deleteCouponById(long couponId) {
-		
+		Optional<Coupon> existCoupon = repoCoupon.findById(couponId);		
+		List<Customer> customers = repoCustomer.findAll();
+		for (Customer customer : customers) {
+			List<Coupon> coupons = customer.getCoupons();
+			if(coupons != null) {
+			coupons.removeIf(coupon -> coupon.getId() == couponId);
+			}
+//			
+//			
+////			List<Coupon> couponsNew = null;
+////			for (Coupon coupon : coupons) {
+////				if (coupon.getId() != couponId) {
+////					couponsNew.add(coupon);
+////				}
+////			}
+////			customer.setCoupons(null);
+////			customer.setCoupons(couponsNew);
+		}
+		repoCustomer.saveAll(customers);
+		Optional<Company> company = repoCompany.findById(existCoupon.get().getCompanyID());
+		company.get().getCoupons().removeIf(coupon -> coupon.getId() == couponId);
+		repoCompany.save(company.get());
 		repoCoupon.deleteById(couponId);
 	}
 
