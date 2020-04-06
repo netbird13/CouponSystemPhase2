@@ -36,7 +36,7 @@ public class CompanyController extends ClientController {
 	}
 
 	@PutMapping("updateCoupon")
-	public ResponseEntity<?> updateCoupon(@RequestParam(name = "num") String id, @RequestBody Coupon newCoupon) {
+	public ResponseEntity<?> updateCoupon(@RequestParam(name = "id") String id, @RequestBody Coupon newCoupon) {
 		long companyId = Long.parseLong(id);
 		serviceCompany.updateCoupon(companyId, newCoupon);
 		return new ResponseEntity<>("Coupon with id: " + newCoupon.getId() + "titled: " + newCoupon.getTitle()
@@ -45,20 +45,20 @@ public class CompanyController extends ClientController {
 
 	// ToDo: a company can delete only its own coupons
 	@DeleteMapping("deleteCoupon")
-	public ResponseEntity<?> deleteCoupon(@RequestParam(name = "num") String id) {
+	public ResponseEntity<?> deleteCoupon(@RequestParam(name = "id") String id) {
 		long couponId = Long.parseLong(id);
 		serviceCompany.deleteCouponById(couponId);
 		return new ResponseEntity<>("The coupon was deleted succussfully", HttpStatus.OK);
 	}
 
 	@GetMapping("getCoupons")
-	public ResponseEntity<?> getCompanyCoupons(@RequestParam(name = "num") String id) {
+	public ResponseEntity<?> getCompanyCoupons(@RequestParam(name = "id") String id) {
 		long companyId = Long.parseLong(id);
 		return new ResponseEntity<List<Coupon>>(serviceCompany.getCompanyCoupons(companyId), HttpStatus.OK);
 	}
 
 	@GetMapping("couponsByCat")
-	public ResponseEntity<?> getCompnayCouponsByCategory(@RequestParam(name = "num") String id,
+	public ResponseEntity<?> getCompnayCouponsByCategory(@RequestParam(name = "id") String id,
 			@RequestParam(name = "cat") Category category) {
 		long companyId = Long.parseLong(id);
 		return new ResponseEntity<List<Coupon>>(serviceCompany.getCompanyCouponsByCategory(companyId, category),
@@ -66,7 +66,7 @@ public class CompanyController extends ClientController {
 	}
 
 	@GetMapping("coupnsByMax")
-	public ResponseEntity<?> getCompanyCouponsByMaxPrice(@RequestParam(name = "num") String id,
+	public ResponseEntity<?> getCompanyCouponsByMaxPrice(@RequestParam(name = "id") String id,
 			@RequestParam(name = "price") String price) {
 		long companyId = Long.parseLong(id);
 		long maxPrice = Long.parseLong(price);
@@ -75,7 +75,7 @@ public class CompanyController extends ClientController {
 	}
 
 	@GetMapping("details")
-	public ResponseEntity<?> getCompanyDetails(@RequestParam(name = "num") String id) {
+	public ResponseEntity<?> getCompanyDetails(@RequestParam(name = "id") String id) {
 		long companyId = Long.parseLong(id);
 		return new ResponseEntity<>(serviceCompany.getCompanyDetails(companyId), HttpStatus.OK);
 	}

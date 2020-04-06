@@ -33,48 +33,48 @@ public class CompanyService {
 	@Autowired
 	CustomerRepository repoCustomer;
 
-//	@PostConstruct
-//	public void InitDB() {
-//		int currentYear = new GregorianCalendar().get(Calendar.YEAR);
-//		Calendar startDate = new GregorianCalendar();
-//		Calendar endDate = new GregorianCalendar();
-//
-//		repoCoupon.deleteAll();
-//
-//		List<Coupon> coupons1 = new ArrayList<>();
-//		startDate.set(Calendar.YEAR, new Random().nextInt((currentYear + 30) - currentYear) + currentYear);
-//		endDate = startDate;
-//		endDate.set(Calendar.YEAR, endDate.get(Calendar.YEAR) + 1);
-//		coupons1.add(new Coupon(2, "Buy one shoe - get the other for free", "Shoes don't have to come in pairs",
-//				startDate, endDate, 13, 33.99, "image", Category.Clothes));
-//
-//		List<Coupon> coupons2 = new ArrayList<>();
-//		startDate.set(Calendar.YEAR, new Random().nextInt((currentYear + 30) - currentYear) + currentYear);
-//		endDate = startDate;
-//		endDate.set(Calendar.YEAR, endDate.get(Calendar.YEAR) + 1);
-//		coupons2.add(new Coupon(2, "Println", "Print LN on T-shirt", startDate, endDate, 200, 99.33, "image",
-//				Category.Clothes));
-//
-//		repoCompany.deleteAll();
-//		List<Company> companies = new ArrayList<>();
-//		Company company1 = new Company("Tavor", "Tavor@gmail.com", "31415");
-//		Company company2 = new Company("Galil", "Galil@gmail.com", "75988");
-//
-//		for (Coupon coupon : coupons1) {
-//			coupon.setCompanyID(company1.getId());
-//		}
-//		for (Coupon coupon : coupons2) {
-//			coupon.setCompanyID(company2.getId());
-//		}
-//
-//		company1.setCoupons(coupons1);
-//		company2.setCoupons(coupons2);
-//
-//		companies.add(company1);
-//		companies.add(company2);
-//		
-//		repoCompany.saveAll(companies);
-//	}
+	@PostConstruct
+	public void InitDB() {
+		int currentYear = new GregorianCalendar().get(Calendar.YEAR);
+		Calendar startDate = new GregorianCalendar();
+		Calendar endDate = new GregorianCalendar();
+
+		repoCoupon.deleteAll();
+
+		List<Coupon> coupons1 = new ArrayList<>();
+		startDate.set(Calendar.YEAR, new Random().nextInt((currentYear + 30) - currentYear) + currentYear);
+		endDate = startDate;
+		endDate.set(Calendar.YEAR, endDate.get(Calendar.YEAR) + 1);
+		coupons1.add(new Coupon(2, "Buy one shoe - get the other for free", "Shoes don't have to come in pairs",
+				startDate, endDate, 13, 33.99, "image", Category.Clothes));
+
+		List<Coupon> coupons2 = new ArrayList<>();
+		startDate.set(Calendar.YEAR, new Random().nextInt((currentYear + 30) - currentYear) + currentYear);
+		endDate = startDate;
+		endDate.set(Calendar.YEAR, endDate.get(Calendar.YEAR) + 1);
+		coupons2.add(new Coupon(2, "Println", "Print LN on T-shirt", startDate, endDate, 200, 99.33, "image",
+				Category.Clothes));
+
+		repoCompany.deleteAll();
+		List<Company> companies = new ArrayList<>();
+		Company company1 = new Company("Tavor", "Tavor@gmail.com", "31415");
+		Company company2 = new Company("Galil", "Galil@gmail.com", "75988");
+
+		for (Coupon coupon : coupons1) {
+			coupon.setCompanyID(company1.getId());
+		}
+		for (Coupon coupon : coupons2) {
+			coupon.setCompanyID(company2.getId());
+		}
+
+		company1.setCoupons(coupons1);
+		company2.setCoupons(coupons2);
+
+		companies.add(company1);
+		companies.add(company2);
+		
+		repoCompany.saveAll(companies);
+	}
 
 	public void addCoupon(Coupon coupon) {
 		Optional<Company> company = repoCompany.findById(coupon.getCompanyID());

@@ -35,13 +35,13 @@ public class CustomerController extends ClientController {
 	}
 
 	@GetMapping("getCoupons")
-	public ResponseEntity<?> getCustomerCoupons(@RequestParam(name = "num") String id) {
+	public ResponseEntity<?> getCustomerCoupons(@RequestParam(name = "id") String id) {
 		long customerId = Long.parseLong(id);
 		return new ResponseEntity<List<Coupon>>(serviceCustomer.getCustomerCoupons(customerId), HttpStatus.OK);
 	}
 
 	@GetMapping("couponsByCat") // add ignoreCase to category
-	public ResponseEntity<?> getCustomerCouponsByCategory(@RequestParam(name = "num") String id,
+	public ResponseEntity<?> getCustomerCouponsByCategory(@RequestParam(name = "id") String id,
 			@RequestParam(name = "cat") Category category) {
 		long customerId = Long.parseLong(id);
 		return new ResponseEntity<List<Coupon>>(serviceCustomer.getCustomerCouponsByCategory(customerId, category),
@@ -49,7 +49,7 @@ public class CustomerController extends ClientController {
 	}
 
 	@GetMapping("couponsByMax")
-	public ResponseEntity<?> getCustomerCouponsByMaxPrice(@RequestParam(name = "num") String id,
+	public ResponseEntity<?> getCustomerCouponsByMaxPrice(@RequestParam(name = "id") String id,
 			@RequestParam(name = "price") String price) {
 		long customerId = Long.parseLong(id);
 		long maxPrice = Long.parseLong(price);
@@ -58,7 +58,7 @@ public class CustomerController extends ClientController {
 	}
 
 	@GetMapping("details")
-	public ResponseEntity<?> getCustomerDetails(@RequestParam(name = "num") String id) {
+	public ResponseEntity<?> getCustomerDetails(@RequestParam(name = "id") String id) {
 		long customerId = Long.parseLong(id);
 		return new ResponseEntity<>(serviceCustomer.getCustomerDetails(customerId), HttpStatus.OK);
 	}

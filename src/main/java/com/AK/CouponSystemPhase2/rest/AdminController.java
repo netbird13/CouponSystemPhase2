@@ -42,7 +42,7 @@ public class AdminController extends ClientController {
 	}
 
 	@PutMapping("updateCompany")
-	public ResponseEntity<?> updateCompany(@RequestParam(name = "num") String id, @RequestBody Company newCompany) {
+	public ResponseEntity<?> updateCompany(@RequestParam(name = "id") String id, @RequestBody Company newCompany) {
 		long companyId = Long.parseLong(id);
 		Company companyReturned = adminService.updateCompany(companyId, newCompany);
 		if (companyReturned != null) {
@@ -52,11 +52,10 @@ public class AdminController extends ClientController {
 		return new ResponseEntity<>(
 				newCompany.getName() + " was NOT updated! Its id '" + companyId + "' and its name are immutable.",
 				HttpStatus.BAD_REQUEST);
-
 	}
 
 	@DeleteMapping("deleteCompany")
-	public ResponseEntity<?> deleteCompany(@RequestParam(name = "num") String id) {
+	public ResponseEntity<?> deleteCompany(@RequestParam(name = "id") String id) {
 		int cmpnyId = Integer.parseInt(id);
 		adminService.deleteCompany(cmpnyId);
 		return new ResponseEntity<String>("Company deleted", HttpStatus.OK);
@@ -77,13 +76,17 @@ public class AdminController extends ClientController {
 
 	@PostMapping("addCustomer")
 	public ResponseEntity<?> addCustomer(@RequestBody Customer customer) {
-		adminService.addCustomer(customer);
+		Customer customerReturned = adminService.addCustomer(customer);
+		if(customerReturned != null) {
 		return new ResponseEntity<>(customer.getFirstName() + " " + customer.getLastName() + " was added successfully",
 				HttpStatus.OK);
+		}
+		return new ResponseEntity<>(customer.getFirstName() + " " + customer.getLastName() + " was NOT added: The email inserted: " + customer.getEmail() + " is already in use",
+				HttpStatus.BAD_REQUEST);
 	}
 
 	@PutMapping("updateCustomer")
-	public ResponseEntity<?> updateCustomer(@RequestParam(name = "num") String id, @RequestBody Customer newCustomer) {
+	public ResponseEntity<?> updateCustomer(@RequestParam(name = "id") String id, @RequestBody Customer newCustomer) {
 		long cstmrId = Long.parseLong(id);
 		adminService.updateCustomer(cstmrId, newCustomer);
 		return new ResponseEntity<>(cstmrId + " " + newCustomer.getFirstName() + " " + newCustomer.getLastName()
@@ -102,7 +105,7 @@ public class AdminController extends ClientController {
 	}
 
 	@DeleteMapping("deleteCustomer")
-	public ResponseEntity<?> deleteCustomer(@RequestParam(name = "num") String id) {
+	public ResponseEntity<?> deleteCustomer(@RequestParam(name = "id") String id) {
 		int cstmrId = Integer.parseInt(id);
 		adminService.deleteCustomer(cstmrId);
 		return new ResponseEntity<String>("Customer deleted", HttpStatus.OK);
