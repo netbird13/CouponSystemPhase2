@@ -23,14 +23,14 @@ public class CustomerService {
 	@Autowired
 	private CouponRepository repoCoupon;
 
-	@PostConstruct
-	public void InitDB() {
-		repoCustomer.deleteAll();
-		List<Customer> customers = new ArrayList<>();
-		customers.add(new Customer("Naftalin", "Cohen", "Naftalin@gmail.com", "1234"));
-		customers.add(new Customer("Matisyahu", "Makabi", "Matisyahu@gmail.com", "5678"));
-		repoCustomer.saveAll(customers);
-	}
+//	@PostConstruct
+//	public void InitDB() {
+//		repoCustomer.deleteAll();
+//		List<Customer> customers = new ArrayList<>();
+//		customers.add(new Customer("Naftalin", "Cohen", "Naftalin@gmail.com", "1234"));
+//		customers.add(new Customer("Matisyahu", "Makabi", "Matisyahu@gmail.com", "5678"));
+//		repoCustomer.saveAll(customers);
+//	}
 
 	public String purchaseCoupon(long customerId, long couponid) {
 		Optional<Customer> existCustomer = repoCustomer.findById(customerId);
