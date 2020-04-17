@@ -63,29 +63,11 @@ public class AdminService {
 			for (Customer customer : customers) {
 				List<Coupon> customerCoupons = customer.getCoupons();
 				if (customerCoupons != null) {
-					for (Coupon coupon2 : customerCoupons) {
-						if (coupon2.getId() == coupon.getId()) {
-							customerCoupons.remove(coupon2);
-						}
-					}
+					customerCoupons.removeAll(companyCoupons);
 				}
 			}
 		}
 		repoCustomer.saveAll(customers);
-
-		// deleting coupons of that company from the repository
-		List<Coupon> couponsInRepo = repoCoupon.findAll();
-		for (Coupon coupon : couponsInRepo) {
-			if (couponsInRepo != null) {
-				for (Coupon coupon2 : companyCoupons) {
-					if (coupon.getId() == coupon2.getId()) {
-						couponsInRepo.remove(coupon);
-					}
-				}
-			}
-		}
-		repoCoupon.saveAll(couponsInRepo);
-
 		repoCompany.delete(existCompany.get());
 	}
 
@@ -117,35 +99,10 @@ public class AdminService {
 
 	public void deleteCustomer(long id) {
 		Optional<Customer> customer = repoCustomer.findById(id);
-		List<Coupon> customerCoupons = customer.get().getCoupons();
-		List<Coupon> couponsInRepo = repoCoupon.findAll();
-		if (customerCoupons != null) {
-			for (Coupon coupon : customerCoupons) {
-				for (Coupon coupon2 : couponsInRepo) {
-					if (coupon.getId() == coupon2.getId()) {
-						couponsInRepo.remove(coupon2);
-					}
-				}
-
-			}
-		}
-
+		customer.get().getCoupons().clear();
+		repoCustomer.save(customer.get());
 		repoCustomer.delete(customer.get());
-
 	}
-
-	// deleting coupons of that company from the repository
-//			List<Coupon> couponsInRepo = repoCoupon.findAll();
-//			for (Coupon coupon : couponsInRepo) {
-//				if (couponsInRepo != null) {
-//					for (Coupon coupon2 : companyCoupons) {
-//						if (coupon == coupon2) {
-//							couponsInRepo.remove(coupon2);
-//						}
-//					}
-//				}
-//			}
-//			repoCoupon.saveAll(couponsInRepo);
 
 	public List<Customer> getCustomers() {
 		return repoCustomer.findAll();
