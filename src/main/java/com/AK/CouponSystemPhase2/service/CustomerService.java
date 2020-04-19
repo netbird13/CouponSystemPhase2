@@ -35,6 +35,17 @@ public class CustomerService {
 	public String purchaseCoupon(long customerId, long couponid) {
 		Optional<Customer> existCustomer = repoCustomer.findById(customerId);
 		Optional<Coupon> existCoupon = repoCoupon.findById(couponid);
+		
+		if (existCoupon.get().getAmount() == 0) {
+			return "Truely sorry, but the current coupon is out of stock";
+		}		
+		List <Coupon> customerCoupons = existCustomer.get().getCoupons();
+		for (Coupon coupon : customerCoupons) {
+			if(coupon.getId() == couponid){
+				return "The current customer already possess this coupon";
+			}			
+		}
+		
 		existCustomer.get().getCoupons().add(existCoupon.get());
 		existCoupon.get().setAmount(existCoupon.get().getAmount() - 1);
 		repoCustomer.save(existCustomer.get());
