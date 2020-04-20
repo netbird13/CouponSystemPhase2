@@ -1,6 +1,8 @@
 package com.AK.CouponSystemPhase2.service;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -32,25 +34,35 @@ public class CustomerService {
 //		repoCustomer.saveAll(customers);
 //	}
 
-	public String purchaseCoupon(long customerId, long couponid) {
+	public int purchaseCoupon(long customerId, long couponid) {
 		Optional<Customer> existCustomer = repoCustomer.findById(customerId);
 		Optional<Coupon> existCoupon = repoCoupon.findById(couponid);
-		
-		if (existCoupon.get().getAmount() == 0) {
-			return "Truely sorry, but the current coupon is out of stock";
-		}		
-		List <Coupon> customerCoupons = existCustomer.get().getCoupons();
-		for (Coupon coupon : customerCoupons) {
-			if(coupon.getId() == couponid){
-				return "The current customer already possess this coupon";
-			}			
+		if (existCustomer == null) {
+			return 0;
 		}
-		
+		if (existCoupon == null) {
+			return 1;
+		}
+		if (existCoupon.get().getAmount() == 0) {
+			return 2;
+		}
+		List<Coupon> customerCoupons = existCustomer.get().getCoupons();
+		for (Coupon coupon : customerCoupons) {
+			if (coupon.getId() == couponid) {
+				return 3;
+			}
+		}
+		Calendar couponExpirationDate = existCoupon.get().getEndDate();
+		Calendar currentDate = new GregorianCalendar(2017, Calendar.JANUARY, 25);
+		currentDate.getTime();
+		if (couponExpirationDate.after(currentDate)) {
+			return 4;
+		}
 		existCustomer.get().getCoupons().add(existCoupon.get());
 		existCoupon.get().setAmount(existCoupon.get().getAmount() - 1);
 		repoCustomer.save(existCustomer.get());
 		repoCoupon.save(existCoupon.get());
-		return "purchase succeeded";
+		return 5;
 	}
 
 	public List<Coupon> getCustomerCoupons(long customerId) {

@@ -26,12 +26,32 @@ public class CustomerController extends ClientController {
 	CustomerService serviceCustomer;
 
 	@PostMapping("purchaseCoupon")
-	public ResponseEntity<?> purchaseCoupon(@RequestParam(name = "cuid") String customerid,@RequestParam(name = "coid") String couponid) {
+	public ResponseEntity<?> purchaseCoupon(@RequestParam(name = "cuid") String customerid,
+			@RequestParam(name = "coid") String couponid) {
 		long customerId = Long.parseLong(customerid);
 		long couponId = Long.parseLong(couponid);
-		serviceCustomer.purchaseCoupon(customerId, couponId);
-		return new ResponseEntity<>("the coupon with id:" + couponid
-				+ " was purchased successfully", HttpStatus.OK);
+		int result = serviceCustomer.purchaseCoupon(customerId, couponId);
+		if (result == 0) {
+			return new ResponseEntity<>("This customer doesn't exist in our database", HttpStatus.BAD_REQUEST);
+		}
+		if (result == 1) {
+			return new ResponseEntity<>("This coupon doesn't exist in our database", HttpStatus.BAD_REQUEST);
+		}
+
+		if (result == 2) {
+			return new ResponseEntity<>("Purchase FAILED: This coupon is out of stock", HttpStatus.BAD_REQUEST);
+		}
+		if (result == 3) {
+			return new ResponseEntity<>("Current customer already has this coupon", HttpStatus.BAD_REQUEST);
+		}
+		if (result == 4) {
+			return new ResponseEntity<>("This coupon has already expired", HttpStatus.BAD_REQUEST);
+		}
+		if (result == 5) {
+			return new ResponseEntity<>("the coupon with id:" + couponid + " was purchased successfully",
+					HttpStatus.OK);
+		}
+		return null;
 	}
 
 	@GetMapping("getCoupons")
