@@ -9,6 +9,8 @@ import java.util.Optional;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.AK.CouponSystemPhase2.beans.Category;
@@ -34,36 +36,35 @@ public class CustomerService {
 //		repoCustomer.saveAll(customers);
 //	}
 
-	public int purchaseCoupon(long customerId, long couponid) {
-		Optional<Customer> existCustomer = repoCustomer.findById(customerId);
-		Optional<Coupon> existCoupon = repoCoupon.findById(couponid);
-		if (existCustomer == null) {
-			return 0;
-		}
-		if (existCoupon == null) {
-			return 1;
-		}
-		if (existCoupon.get().getAmount() == 0) {
-			return 2;
-		}
-		List<Coupon> customerCoupons = existCustomer.get().getCoupons();
-		for (Coupon coupon : customerCoupons) {
-			if (coupon.getId() == couponid) {
-				return 3;
-			}
-		}
-		Calendar couponExpirationDate = existCoupon.get().getEndDate();
-		Calendar currentDate = new GregorianCalendar(2017, Calendar.JANUARY, 25);
-		currentDate.getTime();
-		if (couponExpirationDate.after(currentDate)) {
-			return 4;
-		}
-		existCustomer.get().getCoupons().add(existCoupon.get());
-		existCoupon.get().setAmount(existCoupon.get().getAmount() - 1);
-		repoCustomer.save(existCustomer.get());
-		repoCoupon.save(existCoupon.get());
-		return 5;
-	}
+	public ResponseEntity<?> purchaseCouponService(long customerId, long couponid) {
+        Optional<Customer> existCustomer = repoCustomer.findById(customerId);
+        Optional<Coupon> existCoupon = repoCoupon.findById(couponid);
+        if (existCustomer.isEmpty()) {
+            return new ResponseEntity<>("This customer doesn't exist in our database", HttpStatus.BAD_REQUEST);
+        }
+        if (existCoupon.isEmpty()) {
+            return new ResponseEntity<>("This coupon doesn't exist in our database", HttpStatus.BAD_REQUEST);
+        }
+        if (existCoupon.get().getAmount() == 0) {
+            return new ResponseEntity<>("Purchase FAILED: This coupon is out of stock", HttpStatus.BAD_REQUEST);
+        }
+        List<Coupon> customerCoupons = existCustomer.get().getCoupons();
+        for (Coupon coupon : customerCoupons) {
+            if (coupon.getId() == couponid) {
+                return new ResponseEntity<>("Current customer already has this coupon", HttpStatus.BAD_REQUEST);
+            }
+        }
+        Calendar couponExpirationDate = existCoupon.get().getEndDate();
+        Calendar currentDate = Calendar.getInstance();       
+        if (couponExpirationDate.before(currentDate)) {
+            return new ResponseEntity<>("This coupon has already expired", HttpStatus.BAD_REQUEST);
+        }
+        existCustomer.get().getCoupons().add(existCoupon.get());
+        existCoupon.get().setAmount(existCoupon.get().getAmount() - 1);
+        repoCustomer.save(existCustomer.get());
+        repoCoupon.save(existCoupon.get());
+        return new ResponseEntity<>("the coupon with id:" + couponid + " was purchased successfully", HttpStatus.OK);
+    }
 
 	public List<Coupon> getCustomerCoupons(long customerId) {
 		Optional<Customer> existCustomer = repoCustomer.findById(customerId);
