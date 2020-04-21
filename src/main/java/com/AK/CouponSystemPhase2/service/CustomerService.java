@@ -40,10 +40,10 @@ public class CustomerService {
         Optional<Customer> existCustomer = repoCustomer.findById(customerId);
         Optional<Coupon> existCoupon = repoCoupon.findById(couponid);
         if (existCustomer.isEmpty()) {
-            return new ResponseEntity<>("This customer doesn't exist in our database", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Purchase FAILED: This customer doesn't exist in our database", HttpStatus.BAD_REQUEST);
         }
         if (existCoupon.isEmpty()) {
-            return new ResponseEntity<>("This coupon doesn't exist in our database", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Purchase FAILED: This coupon doesn't exist in our database", HttpStatus.BAD_REQUEST);
         }
         if (existCoupon.get().getAmount() == 0) {
             return new ResponseEntity<>("Purchase FAILED: This coupon is out of stock", HttpStatus.BAD_REQUEST);
@@ -51,13 +51,13 @@ public class CustomerService {
         List<Coupon> customerCoupons = existCustomer.get().getCoupons();
         for (Coupon coupon : customerCoupons) {
             if (coupon.getId() == couponid) {
-                return new ResponseEntity<>("Current customer already has this coupon", HttpStatus.BAD_REQUEST);
+                return new ResponseEntity<>("Purchase FAILED: Current customer already has this coupon", HttpStatus.BAD_REQUEST);
             }
         }
         Calendar couponExpirationDate = existCoupon.get().getEndDate();
         Calendar currentDate = Calendar.getInstance();       
         if (couponExpirationDate.before(currentDate)) {
-            return new ResponseEntity<>("This coupon has already expired", HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>("Purchase FAILED: This coupon has already expired", HttpStatus.BAD_REQUEST);
         }
         existCustomer.get().getCoupons().add(existCoupon.get());
         existCoupon.get().setAmount(existCoupon.get().getAmount() - 1);
