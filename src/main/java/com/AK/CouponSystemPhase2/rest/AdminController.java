@@ -114,7 +114,7 @@ public class AdminController extends ClientController {
 	@DeleteMapping("deleteExpiredCoupons")
 	public ResponseEntity<?> deleteCoupons(){
 		adminService.deleteExpiredCoupons();
-		return new ResponseEntity<String>("Expirede coupons deleted", HttpStatus.OK);
+		return new ResponseEntity<String>("Expired coupons deleted", HttpStatus.OK);
 	}
 	
 }

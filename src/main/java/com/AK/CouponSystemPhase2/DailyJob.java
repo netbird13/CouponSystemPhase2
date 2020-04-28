@@ -13,40 +13,24 @@ import com.AK.CouponSystemPhase2.beans.Customer;
 import com.AK.CouponSystemPhase2.repo.CompanyRepository;
 import com.AK.CouponSystemPhase2.repo.CouponRepository;
 import com.AK.CouponSystemPhase2.repo.CustomerRepository;
+import com.AK.CouponSystemPhase2.service.CompanyService;
 
 @Component
 public class DailyJob {
 
 	@Autowired
-	private CompanyRepository repoCompany;
+	private CouponRepository repoCoupon;
 	@Autowired
-	private CustomerRepository repoCustomer;
+	CompanyService serviceCompany;
 
-	
-	@Scheduled(fixedRate = 7000)
+	@Scheduled(fixedRate = 86_400_000)
 	public void deleteExpiredCoupons() {
 		Calendar currentTime = Calendar.getInstance();
-		
-		List<Customer> customers = repoCustomer.findAll();
-		List<Company> companies = repoCompany.findAll();
-		for (Company company : companies) {
-			List<Coupon> companyCoupons = company.getCoupons();
-			for (Coupon coupon : companyCoupons) {
-				if (coupon.getEndDate().before(currentTime)) {
-					companyCoupons.remove(coupon);
-				}
+		List<Coupon> coupons = repoCoupon.findAll();
+		for (Coupon coupon : coupons) {
+			if (coupon.getEndDate().before(currentTime)) {
+				serviceCompany.deleteCouponById(coupon.getId());
 			}
 		}
-		repoCompany.saveAll(companies);
-
-		for (Customer customer : customers) {
-			List<Coupon> customerCoupons = customer.getCoupons();
-			for (Coupon coupon : customerCoupons) {
-				if (coupon.getEndDate().before(currentTime)) {
-					customerCoupons.remove(coupon);
-				}
-			}
-		}
-		repoCustomer.saveAll(customers);
 	}
 }
