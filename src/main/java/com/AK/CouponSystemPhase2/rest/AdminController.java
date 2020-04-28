@@ -110,4 +110,11 @@ public class AdminController extends ClientController {
 		adminService.deleteCustomer(cstmrId);
 		return new ResponseEntity<String>("Customer deleted", HttpStatus.OK);
 	}
+	
+	@DeleteMapping("deleteExpiredCoupons")
+	public ResponseEntity<?> deleteCoupons(){
+		adminService.deleteExpiredCoupons();
+		return new ResponseEntity<String>("Expirede coupons deleted", HttpStatus.OK);
+	}
+	
 }

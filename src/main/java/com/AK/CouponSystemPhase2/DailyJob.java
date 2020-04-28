@@ -22,10 +22,11 @@ public class DailyJob {
 	@Autowired
 	private CustomerRepository repoCustomer;
 
-	Calendar currentTime = Calendar.getInstance();
-
+	
 	@Scheduled(fixedRate = 7000)
 	public void deleteExpiredCoupons() {
+		Calendar currentTime = Calendar.getInstance();
+		
 		List<Customer> customers = repoCustomer.findAll();
 		List<Company> companies = repoCompany.findAll();
 		for (Company company : companies) {
@@ -47,6 +48,5 @@ public class DailyJob {
 			}
 		}
 		repoCustomer.saveAll(customers);
-
 	}
 }

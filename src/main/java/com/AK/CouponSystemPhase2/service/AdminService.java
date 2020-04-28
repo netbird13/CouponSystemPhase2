@@ -1,5 +1,6 @@
 package com.AK.CouponSystemPhase2.service;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Optional;
 
@@ -110,6 +111,32 @@ public class AdminService {
 
 	public Optional<Customer> getCustomer(long id) {
 		return repoCustomer.findById(id);
+	}
+
+	public void deleteExpiredCoupons() {
+		Calendar currentTime = Calendar.getInstance();
+
+		List<Customer> customers = repoCustomer.findAll();
+		List<Company> companies = repoCompany.findAll();
+		for (Company company : companies) {
+			List<Coupon> companyCoupons = company.getCoupons();
+			for (Coupon coupon : companyCoupons) {
+				if (coupon.getEndDate().before(currentTime)) {
+					companyCoupons.remove(coupon);
+				}
+			}
+		}
+		repoCompany.saveAll(companies);
+
+		for (Customer customer : customers) {
+			List<Coupon> customerCoupons = customer.getCoupons();
+			for (Coupon coupon : customerCoupons) {
+				if (coupon.getEndDate().before(currentTime)) {
+					customerCoupons.remove(coupon);
+				}
+			}
+		}
+		repoCustomer.saveAll(customers);
 	}
 
 }
